@@ -1,0 +1,126 @@
+﻿@page "/students"
+@using WebApplication1.Models
+@inject IJSRuntime runtime
+@inject NavigationManager navigraionManager
+@using WebApplication1.Models
+@inject StudentsData Data
+@using WebApplication1.Data
+
+<h3><u>Studenci</u></h3>
+
+<style>
+    td, td {
+        border: 1px solid black;
+    }
+</style>
+<table class="table">
+    @if (students.Count == 0)
+    {
+        <tr>
+            <td>
+                There are no students
+            </td>
+        </tr>
+    }
+    else
+    {
+
+        <tr>
+            <td>Avatar</td>
+            <td @onclick="firstName">First name</td>
+            <td @onclick="lastName">Last name</td>
+            <td @onclick="birthDate">Birthdate</td>
+            <td @onclick="studies">Studies</td>
+        </tr>
+
+        @foreach (var s in students)
+        {
+            <tr>
+                <td>
+                    <center><a href="/StudentPag/@s.Id"> <img src=@s.Picture width="40" height="40" /></a></center>
+                </td>
+                <DeleteComponent Student="s" OnDeleteClicked="DeleteStudent" />
+            </tr>
+        }
+    }
+
+</table>
+
+
+@code {
+
+    private static List<Student> students;
+    protected override void OnInitialized()
+    {
+        students = Data.students;
+    }
+
+    private async Task DeleteStudent(Student student)
+    {
+
+        bool confirm = await runtime.InvokeAsync<bool>("confirm", "Are you sure?");
+        if (confirm)
+        {
+            students.Remove(student);
+        }
+    }
+
+    private bool firstNameb = false;
+    private bool lastNameb = false;
+    private bool birthDateb = false;
+    private bool studiesb = false;
+
+    public void firstName()
+    {
+        if (firstNameb)
+        {
+            firstNameb = false;
+            students = students.OrderByDescending(e => e.FirstName).ToList();
+        }
+        else
+        {
+            firstNameb = true;
+            students = students.OrderBy(e => e.FirstName).ToList();
+        }
+    }
+
+    public void lastName()
+    {
+        if (lastNameb)
+        {
+            lastNameb = false;
+            students = students.OrderByDescending(e => e.LastName).ToList();
+        }
+        else
+        {
+            lastNameb = true;
+            students = students.OrderBy(e => e.LastName).ToList();
+        }
+    }
+    public void birthDate()
+    {
+        if (birthDateb)
+        {
+            birthDateb = false;
+            students = students.OrderByDescending(e => e.Birthdate).ToList();
+        }
+        else
+        {
+            birthDateb = true;
+            students = students.OrderBy(e => e.Birthdate).ToList();
+        }
+    }
+    public void studies()
+    {
+        if (studiesb)
+        {
+            studiesb = false;
+            students = students.OrderByDescending(e => e.Studies).ToList();
+        }
+        else
+        {
+            studiesb = true;
+            students = students.OrderBy(e => e.Studies).ToList();
+        }
+    }
+}

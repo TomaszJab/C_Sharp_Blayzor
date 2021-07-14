@@ -1,0 +1,33 @@
+﻿@using WebApplication1.Models
+
+@inject NavigationManager navigraionManager
+
+<td>
+    @Student.FirstName
+</td>
+<td>
+    @Student.LastName
+</td>
+<td>
+    @Student.Birthdate
+</td>
+<td>
+    @Student.Studies
+
+</td>
+<center>
+    <button @onclick="@(()=>OnDeleteClicked.InvokeAsync(Student))"><img src="https://tdc.znakowo.pl/thumbs/wskaznik-kasowania-w31-znak-kolejowy-21012-6102-310-310-0.jpg" width="40" height="40" /></button>
+</center>
+
+
+
+@code {
+
+    [Parameter]
+    public Student Student { get; set; }
+
+    [Parameter]
+    public EventCallback<Student> OnDeleteClicked { get; set; }
+
+
+}

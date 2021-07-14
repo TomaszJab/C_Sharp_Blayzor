@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ceXUi8eomj5T7cC/rPtaf2Om7UxPqHk0+uWbflkJzWqs92czQmPL2arGDRKoLxZWqOqKOUdrNT7RTQwktd/fzA==",
+  "success": true,
+  "projectFilePath": "D:\\repozytorium\\C_Sharp_Blayzor\\C_Sharp_Blayzor\\WebApplication1\\WebApplication1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tomasz\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
